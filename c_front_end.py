@@ -1,5 +1,5 @@
 import streamlit as st
-import b_backend  # Importar el backend actualizado
+import b_backend  
 
 # Configuración de la página
 st.set_page_config(page_title="IMARPE Chatbot y Excel Analyzer", layout="centered")
