@@ -1,17 +1,16 @@
 from langchain.llms import OpenAI
 from langchain.sql_database import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
-import os
-import a_env_vars
+import streamlit as st
 
 # Configuración de la base de datos
 db = SQLDatabase.from_uri("sqlite:///imarpe.db")
 
 # Configuración del modelo LLM
-os.environ["OPENAI_API_KEY"] = a_env_vars.OPENAI_API_KEY
+openai_api_key = st.secrets["OPENAI_API_KEY"]  # Obtener la clave desde los secretos de Streamlit
 llm = OpenAI(
     temperature=0.7,  # Más creatividad
-    openai_api_key=os.environ["OPENAI_API_KEY"]
+    openai_api_key=openai_api_key
 )
 
 # Configuración de la cadena de base de datos
@@ -43,7 +42,6 @@ Historial de conversación:
 
 Genera una respuesta bien estructurada y fácil de entender con base en los datos y el contexto proporcionado.
 """
-
 
 # Función para procesar preguntas con contexto
 def consulta(input_usuario: str, contexto: list):
